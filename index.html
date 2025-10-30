@@ -795,7 +795,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
         }
 
@@ -806,6 +805,8 @@
             box-shadow: var(--shadow-lg);
             transition: var(--transition);
             position: relative;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .course-card:hover {
@@ -931,143 +932,76 @@
         .dance-styles {
             padding: 100px 0;
             background: var(--white);
+        }
+
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .style-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .styles-showcase {
-            display: grid;
-            gap: 100px;
+        .style-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--deep-pink));
         }
 
-        .style-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        .style-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .style-row:nth-child(even) {
-            direction: rtl;
-        }
-
-        .style-row:nth-child(even) > * {
-            direction: ltr;
-        }
-
-        .style-content {
-            opacity: 0;
-            animation: fadeInLeft 0.8s ease forwards;
-        }
-
-        .style-row:nth-child(even) .style-content {
-            animation: fadeInRight 0.8s ease forwards;
-        }
-
-        .style-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent-pink), var(--deep-pink));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
+        .style-card-icon {
+            font-size: 4rem;
             margin-bottom: 20px;
-            box-shadow: var(--shadow-lg);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .style-name {
+        .style-card-title {
             font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             color: var(--dark);
         }
 
-        .style-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .style-card-description {
             color: var(--medium-gray);
-            margin-bottom: 30px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            min-height: 60px;
         }
 
-        .style-benefits {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .benefit-item {
+        .style-card-tags {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 10px;
-            padding: 15px;
-            background: var(--light-pink);
-            border-radius: 12px;
-            transition: var(--transition);
-        }
-
-        .benefit-item:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .benefit-icon {
-            font-size: 1.5rem;
-        }
-
-        .benefit-text {
-            font-size: 0.95rem;
-            color: var(--dark-gray);
-        }
-
-        .style-visual {
-            position: relative;
-            opacity: 0;
-            animation: fadeInScale 0.8s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .style-image-wrapper {
-            position: relative;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            height: 500px;
-            background: linear-gradient(135deg, var(--light-pink), var(--primary-pink));
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 8rem;
         }
 
-        .style-stats {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .style-stat {
-            text-align: center;
-        }
-
-        .style-stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .style-card-tags span {
+            padding: 5px 15px;
+            background: var(--light-pink);
             color: var(--accent-pink);
-        }
-
-        .style-stat-label {
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-            margin-top: 5px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         /* ===============================================
@@ -1473,102 +1407,203 @@
             background: var(--white);
         }
 
-        .locations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+        .locations-map-wrapper {
+            margin-top: 60px;
         }
 
-        .location-card {
-            background: white;
-            border-radius: 25px;
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 40px;
+            background: var(--light-pink);
+        }
+
+        .map-pins {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .map-pin {
+            position: absolute;
+            cursor: pointer;
+            pointer-events: all;
             transition: var(--transition);
         }
 
-        .location-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
+        .pin-pacurari {
+            top: 40%;
+            left: 50%;
         }
 
-        .location-map {
-            height: 200px;
-            background: linear-gradient(135deg, var(--light-pink), var(--primary-pink));
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+        .pin-dorobant {
+            top: 35%;
+            left: 45%;
         }
 
-        .location-info {
-            padding: 30px;
+        .pin-miroslava {
+            top: 55%;
+            left: 30%;
         }
 
-        .location-name {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark);
+        .pin-tomesti {
+            top: 60%;
+            left: 70%;
         }
 
-        .location-address {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            color: var(--medium-gray);
-            margin-bottom: 20px;
+        .pin-marker {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            animation: bounce 2s infinite;
         }
 
-        .location-schedule {
-            padding: 15px;
-            background: var(--light-pink);
-            border-radius: 15px;
-            margin-bottom: 20px;
+        .pin-popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            font-size: 0.9rem;
         }
 
-        .schedule-title {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 10px;
+        .map-pin:hover .pin-popup {
+            opacity: 1;
+            visibility: visible;
+            bottom: 120%;
         }
 
-        .schedule-item {
+        .locations-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .location-info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .location-info-card.active {
+            border-color: var(--accent-pink);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .location-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .location-badge {
+            padding: 5px 12px;
+            background: var(--light-pink);
+            color: var(--accent-pink);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .location-details {
+            margin-bottom: 20px;
+        }
+
+        .location-details p {
+            margin-bottom: 10px;
+            color: var(--medium-gray);
+        }
+
+        .location-details ul {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .location-details li {
             padding: 5px 0;
             color: var(--dark-gray);
             font-size: 0.95rem;
         }
 
-        .location-cta {
-            display: flex;
-            gap: 15px;
+        .location-special {
+            padding: 12px;
+            background: linear-gradient(135deg, var(--light-pink), rgba(255, 182, 193, 0.3));
+            border-radius: 12px;
+            margin: 15px 0;
+            color: var(--dark);
+            font-size: 0.9rem;
         }
 
-        .location-btn {
-            flex: 1;
-            padding: 12px;
+        .location-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-map,
+        .btn-call {
+            padding: 10px;
             text-align: center;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 0.85rem;
             transition: var(--transition);
         }
 
-        .location-btn.primary {
+        .btn-map {
             background: linear-gradient(135deg, var(--accent-pink), var(--deep-pink));
             color: white;
         }
 
-        .location-btn.secondary {
+        .btn-call {
             background: var(--light-gray);
             color: var(--dark);
         }
 
-        .location-btn:hover {
+        .btn-map:hover,
+        .btn-call:hover {
             transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                height: 300px;
+            }
+
+            .locations-info-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ===============================================
@@ -2423,153 +2458,86 @@
                 <span class="section-badge">Stiluri de Dans</span>
                 <h2 class="section-title">Descoperă-ți Stilul</h2>
                 <p class="section-subtitle">
-                    O varietate de stiluri pentru toate gusturile și nivelurile
+                    Alege stilul care te reprezintă cel mai bine
                 </p>
             </div>
             
-            <div class="styles-showcase">
-                <div class="style-row">
-                    <div class="style-content">
-                        <div class="style-icon">🩰</div>
-                        <h3 class="style-name">Balet Clasic</h3>
-                        <p class="style-description">
-                            Baza tuturor stilurilor de dans, baletul dezvoltă grația, postura perfectă 
-                            și disciplina. Folosim metoda Vaganova adaptată pentru toate vârstele, 
-                            de la prichindei la avansați.
-                        </p>
-                        <div class="style-benefits">
-                            <div class="benefit-item">
-                                <span class="benefit-icon">💪</span>
-                                <span class="benefit-text">Forță și flexibilitate</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">👑</span>
-                                <span class="benefit-text">Postură regală</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🎯</span>
-                                <span class="benefit-text">Concentrare și disciplină</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🎭</span>
-                                <span class="benefit-text">Expresivitate artistică</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="style-visual">
-                        <div class="style-image-wrapper">
-                            🩰
-                            <div class="style-stats">
-                                <div class="style-stat">
-                                    <div class="style-stat-number">200+</div>
-                                    <div class="style-stat-label">Cursanți</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">5</div>
-                                    <div class="style-stat-label">Nivele</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">15+</div>
-                                    <div class="style-stat-label">Spectacole/an</div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="styles-grid">
+                <div class="style-card">
+                    <div class="style-card-icon">🩰</div>
+                    <h3 class="style-card-title">Balet Clasic</h3>
+                    <p class="style-card-description">
+                        Eleganță, grație și disciplină. Dezvoltă postura perfectă și flexibilitatea.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>3-5 ani</span>
+                        <span>6+ ani</span>
+                        <span>Toate nivelurile</span>
                     </div>
                 </div>
                 
-                <div class="style-row">
-                    <div class="style-content">
-                        <div class="style-icon">🎤</div>
-                        <h3 class="style-name">Street Dance & Hip-Hop</h3>
-                        <p class="style-description">
-                            Energia străzii adusă în sala de dans! De la breaking și popping la new style 
-                            și choreography, explorăm toate fațetele culturii urbane cu atitudine și stil.
-                        </p>
-                        <div class="style-benefits">
-                            <div class="benefit-item">
-                                <span class="benefit-icon">⚡</span>
-                                <span class="benefit-text">Energie și vitalitate</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">😎</span>
-                                <span class="benefit-text">Încredere în sine</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🎵</span>
-                                <span class="benefit-text">Simț ritmic dezvoltat</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🤝</span>
-                                <span class="benefit-text">Spirit de echipă</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="style-visual">
-                        <div class="style-image-wrapper">
-                            🕺
-                            <div class="style-stats">
-                                <div class="style-stat">
-                                    <div class="style-stat-number">150+</div>
-                                    <div class="style-stat-label">Dansatori</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">8</div>
-                                    <div class="style-stat-label">Battle-uri/an</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">4</div>
-                                    <div class="style-stat-label">Crew-uri</div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="style-card">
+                    <div class="style-card-icon">🎤</div>
+                    <h3 class="style-card-title">Street Dance</h3>
+                    <p class="style-card-description">
+                        Hip-hop, breaking, popping. Energie urbană și creativitate fără limite.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>8+ ani</span>
+                        <span>Urban Crew</span>
+                        <span>Battle-uri</span>
                     </div>
                 </div>
                 
-                <div class="style-row">
-                    <div class="style-content">
-                        <div class="style-icon">💃</div>
-                        <h3 class="style-name">Dans Latino</h3>
-                        <p class="style-description">
-                            Pasiunea și ritmurile Americii Latine! Salsa, bachata, cha-cha și samba - 
-                            fiecare stil cu personalitatea sa unică, perfect pentru socializare și distracție.
-                        </p>
-                        <div class="style-benefits">
-                            <div class="benefit-item">
-                                <span class="benefit-icon">❤️</span>
-                                <span class="benefit-text">Pasiune și expresie</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🌟</span>
-                                <span class="benefit-text">Carismă naturală</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">💑</span>
-                                <span class="benefit-text">Dans în pereche</span>
-                            </div>
-                            <div class="benefit-item">
-                                <span class="benefit-icon">🎉</span>
-                                <span class="benefit-text">Socializare activă</span>
-                            </div>
-                        </div>
+                <div class="style-card">
+                    <div class="style-card-icon">💃</div>
+                    <h3 class="style-card-title">Dans Latino</h3>
+                    <p class="style-card-description">
+                        Salsa, bachata, cha-cha. Ritm, pasiune și socializare.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>10+ ani</span>
+                        <span>Dans în pereche</span>
+                        <span>Petreceri</span>
                     </div>
-                    <div class="style-visual">
-                        <div class="style-image-wrapper">
-                            💃
-                            <div class="style-stats">
-                                <div class="style-stat">
-                                    <div class="style-stat-number">100+</div>
-                                    <div class="style-stat-label">Cursanți</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">6</div>
-                                    <div class="style-stat-label">Stiluri</div>
-                                </div>
-                                <div class="style-stat">
-                                    <div class="style-stat-number">12</div>
-                                    <div class="style-stat-label">Petreceri/an</div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="style-card">
+                    <div class="style-card-icon">✨</div>
+                    <h3 class="style-card-title">Contemporary</h3>
+                    <p class="style-card-description">
+                        Expresie liberă și creativitate. Combinație între tehnică și emoție.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>12+ ani</span>
+                        <span>Improvizație</span>
+                        <span>Artistic</span>
+                    </div>
+                </div>
+                
+                <div class="style-card">
+                    <div class="style-card-icon">🎪</div>
+                    <h3 class="style-card-title">Jazz Dance</h3>
+                    <p class="style-card-description">
+                        Dinamism și tehnică. Perfect pentru scenă și spectacole.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>8+ ani</span>
+                        <span>Musical</span>
+                        <span>Show</span>
+                    </div>
+                </div>
+                
+                <div class="style-card">
+                    <div class="style-card-icon">🏆</div>
+                    <h3 class="style-card-title">Dans Sportiv</h3>
+                    <p class="style-card-description">
+                        Pregătire pentru competiții. Antrenament intensiv și performanță.
+                    </p>
+                    <div class="style-card-tags">
+                        <span>Selecție</span>
+                        <span>Competiții</span>
+                        <span>Elite</span>
                     </div>
                 </div>
             </div>
@@ -2884,103 +2852,155 @@
                 </p>
             </div>
             
-            <div class="locations-grid">
-                <div class="location-card">
-                    <div class="location-map">📍</div>
-                    <div class="location-info">
-                        <h3 class="location-name">Iași - Păcurari</h3>
-                        <div class="location-address">
-                            📍 Strada Păcurari Nr. 98
-                        </div>
-                        <div class="location-schedule">
-                            <h4 class="schedule-title">Program Cursuri</h4>
-                            <div class="schedule-item">
-                                <span>Luni - Vineri</span>
-                                <span>16:00 - 20:00</span>
+            <div class="locations-map-wrapper">
+                <!-- Map Container -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43516.99733024721!2d27.55!3d47.16!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDA5JzM2LjAiTiAyN8KwMzMnMDAuMCJF!5e0!3m2!1sen!2sro!4v1234567890"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 20px;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                    
+                    <!-- Location Pins on Map -->
+                    <div class="map-pins">
+                        <div class="map-pin pin-pacurari" data-location="pacurari">
+                            <div class="pin-marker">📍</div>
+                            <div class="pin-popup">
+                                <strong>Păcurari</strong><br>
+                                Str. Păcurari Nr. 98
                             </div>
-                            <div class="schedule-item">
-                                <span>Sâmbătă - Duminică</span>
-                                <span>10:00 - 14:00</span>
+                        </div>
+                        <div class="map-pin pin-dorobant" data-location="dorobant">
+                            <div class="pin-marker">📍</div>
+                            <div class="pin-popup">
+                                <strong>Dorobanț</strong><br>
+                                Sala de Sport
                             </div>
                         </div>
-                        <div class="location-cta">
-                            <a href="#" class="location-btn primary">Vezi Harta</a>
-                            <a href="#contact" class="location-btn secondary">Contact</a>
+                        <div class="map-pin pin-miroslava" data-location="miroslava">
+                            <div class="pin-marker">📍</div>
+                            <div class="pin-popup">
+                                <strong>Miroslava</strong><br>
+                                Sala de Sport
+                            </div>
+                        </div>
+                        <div class="map-pin pin-tomesti" data-location="tomesti">
+                            <div class="pin-marker">📍</div>
+                            <div class="pin-popup">
+                                <strong>Tomești</strong><br>
+                                Clubul de Tenis
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="location-card">
-                    <div class="location-map">📍</div>
-                    <div class="location-info">
-                        <h3 class="location-name">Dorobanț</h3>
-                        <div class="location-address">
-                            📍 Zona Centrală, Acces Facil
+                <!-- Location Cards Grid -->
+                <div class="locations-info-grid">
+                    <div class="location-info-card active" data-location="pacurari">
+                        <div class="location-header">
+                            <h3>📍 Iași - Păcurari</h3>
+                            <span class="location-badge">Sediul Principal</span>
                         </div>
-                        <div class="location-schedule">
-                            <h4 class="schedule-title">Program Cursuri</h4>
-                            <div class="schedule-item">
-                                <span>Luni - Vineri</span>
-                                <span>17:00 - 21:00</span>
-                            </div>
-                            <div class="schedule-item">
-                                <span>Sâmbătă</span>
-                                <span>09:00 - 13:00</span>
+                        <div class="location-details">
+                            <p><strong>Adresă:</strong> Strada Păcurari Nr. 98</p>
+                            <p><strong>Program:</strong></p>
+                            <ul>
+                                <li>Luni - Vineri: 16:00 - 20:00</li>
+                                <li>Weekend: 10:00 - 14:00</li>
+                            </ul>
+                            <div class="location-special">
+                                🎁 <strong>Curs DEMO Gratuit</strong><br>
+                                Sâmbătă & Duminică - Ora 12:00
                             </div>
                         </div>
-                        <div class="location-cta">
-                            <a href="#" class="location-btn primary">Vezi Harta</a>
-                            <a href="#contact" class="location-btn secondary">Contact</a>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Strada+Pacurari+98+Iasi" target="_blank" class="btn-map">
+                                🗺️ Deschide în Maps
+                            </a>
+                            <a href="tel:0741589287" class="btn-call">
+                                📞 Sună Acum
+                            </a>
                         </div>
                     </div>
-                </div>
-                
-                <div class="location-card">
-                    <div class="location-map">📍</div>
-                    <div class="location-info">
-                        <h3 class="location-name">Miroslava</h3>
-                        <div class="location-address">
-                            📍 Locație Modernă
+                    
+                    <div class="location-info-card" data-location="dorobant">
+                        <div class="location-header">
+                            <h3>🏢 Dorobanț</h3>
+                            <span class="location-badge">Zonă Centrală</span>
                         </div>
-                        <div class="location-schedule">
-                            <h4 class="schedule-title">Program Cursuri</h4>
-                            <div class="schedule-item">
-                                <span>Marți & Joi</span>
-                                <span>17:00 - 20:00</span>
-                            </div>
-                            <div class="schedule-item">
-                                <span>Sâmbătă</span>
-                                <span>10:00 - 13:00</span>
+                        <div class="location-details">
+                            <p><strong>Adresă:</strong> Sala de Sport Dorobanț</p>
+                            <p><strong>Program:</strong></p>
+                            <ul>
+                                <li>Luni - Vineri: 17:00 - 21:00</li>
+                                <li>Sâmbătă: 09:00 - 13:00</li>
+                            </ul>
+                            <div class="location-special">
+                                ✨ Sală modernă, toate grupele
                             </div>
                         </div>
-                        <div class="location-cta">
-                            <a href="#" class="location-btn primary">Vezi Harta</a>
-                            <a href="#contact" class="location-btn secondary">Contact</a>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Dorobant+Iasi" target="_blank" class="btn-map">
+                                🗺️ Deschide în Maps
+                            </a>
+                            <a href="tel:0741589287" class="btn-call">
+                                📞 Sună Acum
+                            </a>
                         </div>
                     </div>
-                </div>
-                
-                <div class="location-card">
-                    <div class="location-map">📍</div>
-                    <div class="location-info">
-                        <h3 class="location-name">Tomești</h3>
-                        <div class="location-address">
-                            📍 Sală Spațioasă
+                    
+                    <div class="location-info-card" data-location="miroslava">
+                        <div class="location-header">
+                            <h3>🏟️ Miroslava</h3>
+                            <span class="location-badge">Facilități Premium</span>
                         </div>
-                        <div class="location-schedule">
-                            <h4 class="schedule-title">Program Cursuri</h4>
-                            <div class="schedule-item">
-                                <span>Luni, Miercuri, Vineri</span>
-                                <span>18:00 - 20:00</span>
-                            </div>
-                            <div class="schedule-item">
-                                <span>Duminică</span>
-                                <span>11:00 - 13:00</span>
+                        <div class="location-details">
+                            <p><strong>Adresă:</strong> Sala de Sport Miroslava</p>
+                            <p><strong>Program:</strong></p>
+                            <ul>
+                                <li>Marți & Joi: 17:00 - 20:00</li>
+                                <li>Sâmbătă: 10:00 - 13:00</li>
+                            </ul>
+                            <div class="location-special">
+                                🆕 Grupe noi formate
                             </div>
                         </div>
-                        <div class="location-cta">
-                            <a href="#" class="location-btn primary">Vezi Harta</a>
-                            <a href="#contact" class="location-btn secondary">Contact</a>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Miroslava+Iasi" target="_blank" class="btn-map">
+                                🗺️ Deschide în Maps
+                            </a>
+                            <a href="tel:0741589287" class="btn-call">
+                                📞 Sună Acum
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="location-info-card" data-location="tomesti">
+                        <div class="location-header">
+                            <h3>🎾 Tomești</h3>
+                            <span class="location-badge">Spațiu Generos</span>
+                        </div>
+                        <div class="location-details">
+                            <p><strong>Adresă:</strong> Clubul de Tenis Tomești</p>
+                            <p><strong>Program:</strong></p>
+                            <ul>
+                                <li>L, Mi, V: 18:00 - 20:00</li>
+                                <li>Duminică: 11:00 - 13:00</li>
+                            </ul>
+                            <div class="location-special">
+                                📝 Înscrieri deschise
+                            </div>
+                        </div>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Tomesti+Iasi" target="_blank" class="btn-map">
+                                🗺️ Deschide în Maps
+                            </a>
+                            <a href="tel:0741589287" class="btn-call">
+                                📞 Sună Acum
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -3229,6 +3249,13 @@
         const tabButtons = document.querySelectorAll('.tab-button');
         const courseCards = document.querySelectorAll('.course-card');
 
+        // Show all courses on page load
+        courseCards.forEach(card => {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        });
+
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Remove active class from all buttons
@@ -3240,7 +3267,7 @@
                 
                 // Filter course cards
                 courseCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
                         card.style.display = 'block';
                         setTimeout(() => {
                             card.style.opacity = '1';
